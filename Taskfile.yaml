@@ -1,6 +1,6 @@
 # https://taskfile.dev
 
-version: '3'
+version: "3"
 
 vars:
   GREETING: Hello, World!
@@ -14,4 +14,5 @@ tasks:
   first-ppm:
     desc: Generate our first test ppm
     cmds:
+      - mkdir -p ./ppm
       - go run ./src/first-ppm > ./ppm/first.ppm
