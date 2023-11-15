@@ -1,3 +1,3 @@
-module github.com/pjsoftware/rtiaw
+module github.com/pjsoftware/go-rtiaw
 
 go 1.19
