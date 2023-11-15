@@ -2,9 +2,6 @@
 
 version: "3"
 
-vars:
-  GREETING: Hello, World!
-
 tasks:
   default:
     cmds:
@@ -15,3 +12,8 @@ tasks:
     desc: Generate our first test ppm
     cmds:
       - go run ./src/first-ppm
+
+  test:
+    desc: Run all library code tests
+    cmds:
+      - go test ./lib/**
