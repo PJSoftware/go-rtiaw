@@ -14,5 +14,4 @@ tasks:
   first-ppm:
     desc: Generate our first test ppm
     cmds:
-      - mkdir -p ./ppm
-      - go run ./src/first-ppm > ./ppm/first.ppm
+      - go run ./src/first-ppm
