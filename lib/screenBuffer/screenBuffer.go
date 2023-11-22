@@ -6,9 +6,9 @@ import (
 	"os"
 )
 
-// Colour defines a pixel colour in rgb format, where each element is in the
+// Pixel defines a pixel colour in rgb format, where each element is in the
 // range 0-255
-type Colour struct {
+type Pixel struct {
 	r uint8
 	g uint8
 	b uint8
@@ -18,38 +18,38 @@ type Colour struct {
 type ScreenBuffer struct {
 	width  int
 	height int
-	buffer [][]Colour
+	buffer [][]Pixel
 }
 
-// NewColourUI(r,g,b) returns a Colour{} struct as defined by r,g,b where each
+// NewPixel(r,g,b) returns a Pixel{} struct as defined by r,g,b where each
 // element has a range of 0-255
-func NewColourUI(r, g, b uint8) *Colour {
-	col := &Colour{}
+func NewPixel(r, g, b uint8) *Pixel {
+	col := &Pixel{}
 	col.r = r
 	col.g = g
 	col.b = b
 	return col
 }
 
-// NewColour(r,g,b) returns a Colour{} struct as defined by r,g,b where each
+// NewPixelByColour(r,g,b) returns a Pixel{} struct as defined by r,g,b where each
 // element is a float32 in the range of 0.0-1.0. Values greater than 1.0 will be
-// clipped on conversion to the 0-255 required by a pixel Colour
-func NewColour(r, g, b float32) *Colour {
-	ir := uint8(255.999 * r)
-	ig := uint8(255.999 * g)
-	ib := uint8(255.999 * b)
-	return NewColourUI(ir, ig, ib)
+// clipped on conversion to the 0-255 required by the Pixel
+func NewPixelByColour(r, g, b float32) *Pixel {
+	ir := uint8(255.0 * r)
+	ig := uint8(255.0 * g)
+	ib := uint8(255.0 * b)
+	return NewPixel(ir, ig, ib)
 }
 
 // NewScreenBuffer(width, height) returns a ScreenBuffer{} struct
 func NewScreenBuffer(width, height int) *ScreenBuffer {
 	sb := &ScreenBuffer{}
 
-	sbRGB := make([][]Colour, height)
+	sbRGB := make([][]Pixel, height)
 	for y := 0; y < height; y++ {
-		sbRGB[y] = make([]Colour, width)
+		sbRGB[y] = make([]Pixel, width)
 		for x := 0; x < width; x++ {
-			sbRGB[y][x] = Colour{0, 0, 0}
+			sbRGB[y][x] = Pixel{0, 0, 0}
 		}
 	}
 
@@ -62,7 +62,7 @@ func NewScreenBuffer(width, height int) *ScreenBuffer {
 
 // sb.SetPixel(x,y, pixel) sets the (x,y) pixel of the ScreenBuffer to the
 // Colour{} specified
-func (sb *ScreenBuffer) SetPixel(x, y int, pixel *Colour) {
+func (sb *ScreenBuffer) SetPixel(x, y int, pixel *Pixel) {
 	bfr := sb.buffer
 	bfr[y][x].r = pixel.r
 	bfr[y][x].g = pixel.g
