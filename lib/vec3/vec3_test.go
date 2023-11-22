@@ -6,9 +6,9 @@ import (
 	"github.com/pjsoftware/go-rtiaw/lib/vec3"
 )
 
-var testV1 vec3.Vec3 = vec3.Vec3{1.0, 2.0, 3.0}
-var testV2 vec3.Vec3 = vec3.Vec3{4.0, 5.0, 6.0}
-var testV3 vec3.Vec3 = vec3.Vec3{4.0, 3.0, 2.0}
+var testV1 *vec3.Vec3 = &vec3.Vec3{1.0, 2.0, 3.0}
+var testV2 *vec3.Vec3 = &vec3.Vec3{4.0, 5.0, 6.0}
+var testV3 *vec3.Vec3 = &vec3.Vec3{4.0, 3.0, 2.0}
 
 func TestNewVec(t *testing.T) {
 	wantX := 1.0
@@ -109,9 +109,9 @@ func TestLength(t *testing.T) {
 	ls2 := testV2.LengthSquared()
 	ls3 := testV3.LengthSquared()
 
-	exp1 := float64(1+4+9)
-	exp2 := float64(16+25+36)
-	exp3 := float64(16+9+4)
+	exp1 := float64(1 + 4 + 9)
+	exp2 := float64(16 + 25 + 36)
+	exp3 := float64(16 + 9 + 4)
 
 	if ls1 != exp1 {
 		t.Fatalf("testV1 LengthSquared (%f) is not expected %f", ls1, exp1)
@@ -141,15 +141,15 @@ func TestDotProduct(t *testing.T) {
 
 func TestCrossProduct(t *testing.T) {
 	cp := vec3.CrossProduct(testV1, testV2)
-	exp := vec3.Vec3{-3.0, 6.0, -3.0}
+	exp := &vec3.Vec3{-3.0, 6.0, -3.0}
 	if !cp.Equal(exp) {
 		t.Fatalf("Cross product (%s) did not equal expected value %s", cp.String(), exp.String())
 	}
 }
 
 func TestUnitVector(t *testing.T) {
-	uv := vec3.UnitVector(vec3.Vec3{3.0, 4.0, 0.0})
-	exp := vec3.Vec3{0.6, 0.8, 0.0}
+	uv := vec3.UnitVector(&vec3.Vec3{3.0, 4.0, 0.0})
+	exp := &vec3.Vec3{0.6, 0.8, 0.0}
 	if !uv.Equal(exp) {
 		t.Fatalf("Unit vector (%s) did not match expected vector (%s)", uv.String(), exp.String())
 	}
