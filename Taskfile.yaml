@@ -13,6 +13,11 @@ tasks:
     cmds:
       - go run ./src/first-ppm
 
+  cam-test:
+    desc: Generate ppm via camera
+    cmds:
+      - go run ./src/cam-test
+
   test:
     desc: Run all library code tests
     cmds:

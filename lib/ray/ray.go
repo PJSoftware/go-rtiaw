@@ -8,7 +8,7 @@ type Ray struct {
 }
 
 func NewRay(origin *vec3.Point3, dir *vec3.Vec3) *Ray {
-	r := &Ray{origin, vec3.UnitVector(dir)}
+	r := &Ray{origin, dir}
 	return r
 }
 
